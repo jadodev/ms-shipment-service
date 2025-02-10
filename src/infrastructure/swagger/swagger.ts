@@ -1,8 +1,12 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Application } from 'express';
+import dotenv from "dotenv"
+
+dotenv.config();
 
 export function setupSwagger(app: Application): void {
+  const PORT_SWAGGER = process.env.PORT_SWAGGER || 3000;
   const swaggerOptions = {
     swaggerDefinition: {
       openapi: '3.0.0',
@@ -13,7 +17,7 @@ export function setupSwagger(app: Application): void {
       },
       servers: [
         {
-          url: 'http://localhost:3000',
+          url: `http://localhost:${PORT_SWAGGER}`,
         },
       ],
       components: {
