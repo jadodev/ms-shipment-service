@@ -6,7 +6,7 @@ import dotenv from "dotenv"
 dotenv.config();
 
 export function setupSwagger(app: Application): void {
-  const PORT_SWAGGER = process.env.PORT_SWAGGER || 3000;
+  const PORT_SWAGGER = process.env.PORT_SWAGGER || 8000;
   const swaggerOptions = {
     swaggerDefinition: {
       openapi: '3.0.0',
