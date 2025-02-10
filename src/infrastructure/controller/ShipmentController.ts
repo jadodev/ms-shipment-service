@@ -92,7 +92,7 @@ export function createShipmentController(
    *       400:
    *         description: Bad Request
    */
-  router.post('/shipments', async (req: Request, res: Response) => {
+  router.post('', async (req: Request, res: Response) => {
     try {
       const dto = req.body;
       const result = await createService.execute(dto);
@@ -126,7 +126,7 @@ export function createShipmentController(
    *       404:
    *         description: Shipment not found
    */
-  router.get('/shipments/:shipmentId', async (req: Request, res: Response) => {
+  router.get(':shipmentId', async (req: Request, res: Response) => {
     try {
       const shipmentId = req.params.shipmentId;
       const result = await queryService.execute(shipmentId);
@@ -164,7 +164,7 @@ export function createShipmentController(
    *       400:
    *         description: Bad Request
    */
-  router.patch('/shipments', async (req: Request, res: Response) => {
+  router.patch('', async (req: Request, res: Response) => {
     try {
       const dto = req.body; 
       const result = await updateService.execute(dto);

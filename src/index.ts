@@ -52,7 +52,7 @@ async function main() {
       queryShipmentService,
       updateShipmentService
     );
-    app.use("/", shipmentRouter);
+    app.use("/api", shipmentRouter);
 
     const port = process.env.PORT || 3000;
     app.listen(port, () => {

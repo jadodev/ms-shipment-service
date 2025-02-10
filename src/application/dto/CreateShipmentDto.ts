@@ -1,5 +1,4 @@
-// src/application/dto/CreateShipmentDto.ts
-
+import { isValidAddress } from "../../utils/addressValidator";
 /**
  * DTO for creating a Shipment.
  */
@@ -11,7 +10,7 @@ export class CreateShipmentDto {
   shipmentType: string;
   origin: string;
   destination: string;
-  depositDate: string; // ISO string
+  depositDate: string; 
 
   constructor(data: {
     shipmentId: string;
@@ -31,6 +30,9 @@ export class CreateShipmentDto {
     if (!data.origin) throw new Error("origin is required.");
     if (!data.destination) throw new Error("destination is required.");
     if (!data.depositDate) throw new Error("depositDate is required.");
+    if (!isValidAddress(data.destination)) {
+      throw new Error('Invalid destination address format. Please use a valid Colombian address format (e.g., "Cll 123 #34-23").');
+    }
 
     this.shipmentId = data.shipmentId;
     this.customerId = data.customerId;
