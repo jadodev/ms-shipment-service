@@ -1,7 +1,17 @@
 import { Dimensions } from "../valueObjects/Dimensions";
 import { DomainError } from "../exceptions/DomainError";
 
+/**
+ * Represents a shipment, the aggregate root in the shipment domain.
+ * It encapsulates immutable shipment data and maintains its delivery state.
+ */
 export class Shipment {
+  updateShipmentType(arg0: string) {
+      throw new Error("Method not implemented.");
+  }
+  updateOrigin(arg0: string) {
+      throw new Error("Method not implemented.");
+  }
   public readonly shipmentId: string;
   public readonly customerId: string;
   public readonly weight: number;
@@ -11,6 +21,19 @@ export class Shipment {
   public readonly destination: string;
   public readonly depositDate: Date;
 
+
+  /**
+   * Constructs a new Shipment instance.
+   * @param shipmentId Unique identifier for the shipment; must not be empty.
+   * @param customerId Identifier of the customer; must not be empty.
+   * @param weight Weight of the shipment.
+   * @param dimensions Dimensions of the shipment; must not be null.
+   * @param shipmentType Type of the shipment; must not be empty.
+   * @param origin Origin location; must not be empty.
+   * @param destination Destination location; must not be empty.
+   * @param depositDate Date when the shipment was deposited; must not be null.
+   * @throws DomainError if any required parameter is invalid.
+   */
   constructor(
     shipmentId: string,
     customerId: string,
