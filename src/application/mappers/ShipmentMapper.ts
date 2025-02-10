@@ -6,6 +6,11 @@ import { ShipmentDto } from "../dto/ShipmentDto";
  */
 export class ShipmentMapper {
   public static toDto(shipment: Shipment): ShipmentDto {
+    
+    if (!shipment) {
+      throw new Error("Shipment is undefined");
+    }
+
     return new ShipmentDto({
       shipmentId: shipment.shipmentId,
       customerId: shipment.customerId,
