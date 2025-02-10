@@ -29,7 +29,27 @@ export class ShipmentDomainService {
     destination: string,
     depositDate: Date
   ): Shipment {
-    // Aquí se pueden aplicar reglas adicionales, por ejemplo, validaciones complejas o cálculos.
+
+    if (!shipmentId || !customerId || !origin || !destination) {
+      throw new DomainError("Shipment ID, Customer ID, Origin, and Destination cannot be empty.");
+    }
+
+    if (!(depositDate instanceof Date) || isNaN(depositDate.valueOf())) {
+      throw new DomainError("Invalid deposit date.");
+    }
+
+    if (weight <= 0) {
+      throw new DomainError("Weight must be greater than zero.");
+    }
+
+    if (!(dimensions instanceof Dimensions)) {
+      throw new DomainError("Invalid dimensions.");
+    }
+
+    if (!(depositDate instanceof Date) || isNaN(depositDate.getTime())) {
+      throw new DomainError("Invalid deposit date.");
+    }
+  
     return new Shipment(
       shipmentId,
       customerId,
@@ -55,10 +75,15 @@ export class ShipmentDomainService {
     shipment: Shipment,
     newDestination: string
   ): Shipment {
+
+    if (!shipment) {
+      throw new DomainError("Shipment cannot be null.");
+    }
+
     if (!newDestination) {
       throw new DomainError("New destination cannot be null or empty.");
     }
-    // Crear una nueva instancia manteniendo el resto de los datos
+
     return new Shipment(
       shipment.shipmentId,
       shipment.customerId,
@@ -66,7 +91,7 @@ export class ShipmentDomainService {
       shipment.dimensions,
       shipment.shipmentType,
       shipment.origin,
-      newDestination, // Se actualiza el destino
+      newDestination,
       shipment.depositDate
     );
   }

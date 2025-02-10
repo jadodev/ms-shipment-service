@@ -6,6 +6,12 @@ import { DomainError } from "../exceptions/DomainError";
  * It encapsulates immutable shipment data and maintains its delivery state.
  */
 export class Shipment {
+  updateShipmentType(arg0: string) {
+      throw new Error("Method not implemented.");
+  }
+  updateOrigin(arg0: string) {
+      throw new Error("Method not implemented.");
+  }
   public readonly shipmentId: string;
   public readonly customerId: string;
   public readonly weight: number;

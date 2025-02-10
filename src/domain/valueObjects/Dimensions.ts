@@ -1,7 +1,12 @@
+import { DomainError } from "../exceptions/DomainError";
+
 /**
  * Immutable value object representing the dimensions of a shipment.
  */
 export class Dimensions {
+  getVolume(): number {
+    return this.height * this.width * this.length;
+  }
     public readonly height: number;
     public readonly width: number;
     public readonly length: number;
@@ -15,8 +20,9 @@ export class Dimensions {
      */
     constructor(height: number, width: number, length: number) {
       if (height <= 0 || width <= 0 || length <= 0) {
-        throw new Error("All dimensions must be positive values.");
+        throw new DomainError("All dimensions must be positive values.");
       }
+      
       this.height = height;
       this.width = width;
       this.length = length;
