@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for application/dto/ShipmentDto.ts</title>
+    <title>Code coverage report for infrastructure/messaging/KafkaConsumer.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">application/dto</a> ShipmentDto.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">infrastructure/messaging</a> KafkaConsumer.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -91,81 +91,60 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L29'></a><a href='#L29'>29</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// src/application/dto/ShipmentDto.ts
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { consumer } from '../config/messageBroker';
 &nbsp;
 /**
- * DTO representing a Shipment.
+ * KafkaConsumer encapsula la lógica para suscribirse a un topic y procesar mensajes.
  */
-export class ShipmentDto {
-  shipmentId: string;
-  customerId: string;
-  weight: number;
-  dimensions: { height: number; width: number; length: number; };
-  shipmentType: string;
-  origin: string;
-  destination: string;
-  depositDate: string; // ISO string
-&nbsp;
-  constructor(data: {
-    shipmentId: string;
-    customerId: string;
-    weight: number;
-    dimensions: { height: number; width: number; length: number; };
-    shipmentType: string;
-    origin: string;
-    destination: string;
-    depositDate: string;
-  }) {
-    this.shipmentId = data.shipmentId;
-    this.customerId = data.customerId;
-    this.weight = data.weight;
-    this.dimensions = data.dimensions;
-    this.shipmentType = data.shipmentType;
-    this.origin = data.origin;
-    this.destination = data.destination;
-    this.depositDate = data.depositDate;
+export class KafkaConsumer {
+  /**
+   * Se suscribe a un topic y ejecuta un callback por cada mensaje recibido.
+   * @param topic El topic al que suscribirse.
+   * @param handler Función asíncrona que procesa cada mensaje.
+   */
+  public async subscribe(topic: string, handler: (message: any) =&gt; Promise&lt;void&gt;): Promise&lt;void&gt; {
+    await consumer.subscribe({ topic, fromBeginning: true });
+    await consumer.run({
+      eachMessage: async ({ message }) =&gt; {
+        const value = message.value ? message.value.toString() : <span class="branch-1 cbranch-no" title="branch not covered" >'';</span>
+        try {
+          const parsed = JSON.parse(value);
+          await handler(parsed);
+        } catch (error) {
+          // En caso de error, se pasa el mensaje sin parsear o se registra el error.
+          console.error("Error processing message:", error);
+          await handler(value);
+        }
+      },
+    });
   }
 }
 &nbsp;</pre></td></tr></table></pre>
