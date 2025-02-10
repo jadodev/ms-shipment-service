@@ -1,5 +1,3 @@
-// src/application/services/QueryShipmentService.ts
-
 import { IQueryShipmentUseCase } from "../ports/in/IQueryShipmentUseCase";
 import { ShipmentDto } from "../dto/ShipmentDto";
 import { IShipmentRepository } from "../ports/out/IShipmentRepository";
