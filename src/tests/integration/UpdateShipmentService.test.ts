@@ -76,7 +76,7 @@ describe("UpdateShipmentService Integration Test", () => {
     await repository.save(shipment);
   });
 
-  it("debe actualizar el destino de un shipment, persistir los cambios, publicar el evento y retornar el ShipmentDto actualizado", async () => {
+  it("should update the destination of a shipment, persist the changes, publish the event, and return the updated ShipmentDto", async () => {
     const updateShipmentDto = new UpdateShipmentDto({
       shipmentId: "12345",
       newDestination: "San Francisco"

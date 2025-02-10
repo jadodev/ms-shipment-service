@@ -7,9 +7,6 @@ import { Dimensions } from "../../domain/valueObjects/Dimensions";
 import { Shipment } from "../../domain/entity/Shipment";
 import { ShipmentDomainService } from "../../domain/services/ShipmentServiceDomain";
 
-/**
- * Implementación in-memory del repositorio de Shipments.
- */
 class InMemoryShipmentRepository implements IShipmentRepository {
   private shipments: Map<string, Shipment> = new Map();
 
@@ -26,16 +23,10 @@ class InMemoryShipmentRepository implements IShipmentRepository {
   }
 }
 
-/**
- * Implementación "falsa" del publicador de eventos.
- * Se extiende la clase EventPublisher para cumplir con la firma (incluyendo la propiedad kafkaProducer)
- * y se sobreescribe el método publish para almacenar los eventos en un array.
- */
 class FakeEventPublisher extends EventPublisher {
   public events: Array<{ topic: string; event: any }> = [];
 
   constructor() {
-    // Llamamos al constructor de EventPublisher pasando un KafkaProducer dummy.
     super({ send: async () => {} } as any);
   }
 
@@ -44,12 +35,6 @@ class FakeEventPublisher extends EventPublisher {
   }
 }
 
-/**
- * Implementación "falsa" del servicio de dominio.
- * Se extiende ShipmentDomainService y se sobrescribe createShipment para retornar el Shipment directamente.
- * Nota: La firma original de createShipment en ShipmentDomainService es síncrona (retorna Shipment),
- * por lo que en nuestro Fake se retorna el Shipment sin envolverlo en una Promise.
- */
 class FakeShipmentDomainService extends ShipmentDomainService {
   createShipment(
     shipmentId: string,
@@ -87,7 +72,7 @@ describe("CreateShipmentService Integration Test", () => {
     createShipmentService = new CreateShipmentService(domainService, repository, eventPublisher);
   });
 
-  it("debe crear un shipment, persistirlo, publicar el evento y retornar el ShipmentDto correcto", async () => {
+  it("should create a shipment, persist it, publish the event, and return the correct ShipmentDto", async () => {
     const createShipmentDto = new CreateShipmentDto({
       shipmentId: "12345",
       customerId: "67890",

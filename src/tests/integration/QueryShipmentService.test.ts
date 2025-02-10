@@ -18,7 +18,7 @@ describe("QueryShipmentService", () => {
     queryShipmentService = new QueryShipmentService(shipmentRepositoryMock);
   });
 
-  it("debe retornar un ShipmentDto cuando se encuentra el shipment", async () => {
+  it("should return a ShipmentDto when the shipment is found", async () => {
     const depositDate = new Date("2025-02-09T10:00:00Z");
     const shipment = new Shipment(
       "12345",
@@ -49,7 +49,7 @@ describe("QueryShipmentService", () => {
     expect(shipmentRepositoryMock.findById).toHaveBeenCalledWith("12345");
   });
 
-  it("debe lanzar un error cuando no se encuentra el shipment", async () => {
+  it("should throw an error when the shipment is not found", async () => {
     shipmentRepositoryMock.findById.mockResolvedValue(null);
 
     await expect(queryShipmentService.execute("nonexistent")).rejects.toThrow("Shipment not found.");

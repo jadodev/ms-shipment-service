@@ -1,5 +1,3 @@
-// src/infrastructure/repository/MySQLShipmentRepository.ts
-
 import pool from "../config/database";
 import { IShipmentRepository } from "../../application/ports/out/IShipmentRepository";
 import { Shipment } from "../../domain/entity/Shipment";
@@ -59,7 +57,6 @@ export class MySQLShipmentRepository implements IShipmentRepository {
       const [rows]: any = await connection.execute(sql, [shipmentId]);
       if (Array.isArray(rows) && rows.length > 0) {
         const row = rows[0];
-        // Construir el value object Dimensions usando las columnas separadas.
         const dimensions = new Dimensions(
           row.height,
           row.width,

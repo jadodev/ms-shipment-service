@@ -4,13 +4,6 @@ import { QueryShipmentService } from '../../application/services/QueryShipmentSe
 import { UpdateShipmentService } from '../../application/services/UpdateShipmentService';
 
 /**
- * Crea y configura un router Express para el microservicio Shipment.
- *
- * Exponemos los siguientes endpoints:
- *  - POST /shipments: Crea un nuevo shipment.
- *  - GET /shipments/:shipmentId: Consulta un shipment por su ID.
- *  - PATCH /shipments: Actualiza el destino de un shipment.
- *
  * @param createService Servicio de aplicación para crear shipments.
  * @param queryService Servicio de aplicación para consultar shipments.
  * @param updateService Servicio de aplicación para actualizar el destino de un shipment.
@@ -23,15 +16,13 @@ export function createShipmentController(
 ): Router {
   const router = Router();
 
-  // Health check endpoint
   router.get('', (req: Request, res: Response) => {
     res.json({ status: 'Shipment Service is running' });
   });
   
-  // Endpoint para crear un shipment
   router.post('/shipments', async (req: Request, res: Response) => {
     try {
-      const dto = req.body; // Se espera que cumpla con la estructura de CreateShipmentDto.
+      const dto = req.body;
       const result = await createService.execute(dto);
       res.status(201).json(result);
     } catch (error: any) {
@@ -40,7 +31,6 @@ export function createShipmentController(
     }
   });
 
-  // Endpoint para consultar un shipment por ID
   router.get('/shipments/:shipmentId', async (req: Request, res: Response) => {
     try {
       const shipmentId = req.params.shipmentId;
@@ -52,10 +42,9 @@ export function createShipmentController(
     }
   });
 
-  // Endpoint para actualizar el destino de un shipment
   router.patch('/shipments', async (req: Request, res: Response) => {
     try {
-      const dto = req.body; // Se espera que cumpla con la estructura de UpdateShipmentDto.
+      const dto = req.body; 
       const result = await updateService.execute(dto);
       res.json(result);
     } catch (error: any) {
