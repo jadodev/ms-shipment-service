@@ -4,9 +4,7 @@ import { DomainError } from "../exceptions/DomainError";
  * Immutable value object representing the dimensions of a shipment.
  */
 export class Dimensions {
-  getVolume(): number {
-    return this.height * this.width * this.length;
-  }
+
     public readonly height: number;
     public readonly width: number;
     public readonly length: number;
@@ -43,6 +41,10 @@ export class Dimensions {
   
     public toString(): string {
       return `Dimensions { height: ${this.height}, width: ${this.width}, length: ${this.length} }`;
+    }
+
+    getVolume(): number {
+      return this.height * this.width * this.length;
     }
   }
   
