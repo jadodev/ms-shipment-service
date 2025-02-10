@@ -13,6 +13,7 @@ import { CreateShipmentService } from './application/services/CreateShipmentServ
 import { QueryShipmentService } from './application/services/QueryShipmentService';
 import { UpdateShipmentService } from './application/services/UpdateShipmentService';
 import { createShipmentController } from './infrastructure/controller/ShipmentController';
+import { setupSwagger } from './infrastructure/swagger/swagger';
 
 async function main() {
   try {
@@ -43,6 +44,8 @@ async function main() {
 
     const app: Application = express();
     app.use(express.json());
+
+    setupSwagger(app);
 
     const shipmentRouter = createShipmentController(
       createShipmentService,

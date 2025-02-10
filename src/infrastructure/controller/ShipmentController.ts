@@ -4,6 +4,31 @@ import { QueryShipmentService } from '../../application/services/QueryShipmentSe
 import { UpdateShipmentService } from '../../application/services/UpdateShipmentService';
 
 /**
+ * @swagger
+ * tags:
+ *   name: Shipments
+ *   description: Shipment management endpoints
+ */
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Health check endpoint
+ *     tags: [Shipments]
+ *     responses:
+ *       200:
+ *         description: Shipment Service is running
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: Shipment Service is running
+ */
+/**
  * @param createService Servicio de aplicación para crear shipments.
  * @param queryService Servicio de aplicación para consultar shipments.
  * @param updateService Servicio de aplicación para actualizar el destino de un shipment.
@@ -19,7 +44,54 @@ export function createShipmentController(
   router.get('', (req: Request, res: Response) => {
     res.json({ status: 'Shipment Service is running' });
   });
-  
+
+  /**
+   * @swagger
+   * /shipments:
+   *   post:
+   *     summary: Create a new shipment
+   *     tags: [Shipments]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               shipmentId:
+   *                 type: string
+   *               customerId:
+   *                 type: string
+   *               weight:
+   *                 type: number
+   *               dimensions:
+   *                 type: object
+   *                 properties:
+   *                   height:
+   *                     type: number
+   *                   width:
+   *                     type: number
+   *                   length:
+   *                     type: number
+   *               shipmentType:
+   *                 type: string
+   *               origin:
+   *                 type: string
+   *               destination:
+   *                 type: string
+   *               depositDate:
+   *                 type: string
+   *                 format: date-time
+   *     responses:
+   *       201:
+   *         description: Shipment created successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Shipment'
+   *       400:
+   *         description: Bad Request
+   */
   router.post('/shipments', async (req: Request, res: Response) => {
     try {
       const dto = req.body;
@@ -31,6 +103,29 @@ export function createShipmentController(
     }
   });
 
+  /**
+   * @swagger
+   * /shipments/{shipmentId}:
+   *   get:
+   *     summary: Get a shipment by ID
+   *     tags: [Shipments]
+   *     parameters:
+   *       - in: path
+   *         name: shipmentId
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: The shipment ID
+   *     responses:
+   *       200:
+   *         description: The shipment data
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Shipment'
+   *       404:
+   *         description: Shipment not found
+   */
   router.get('/shipments/:shipmentId', async (req: Request, res: Response) => {
     try {
       const shipmentId = req.params.shipmentId;
@@ -42,6 +137,33 @@ export function createShipmentController(
     }
   });
 
+  /**
+   * @swagger
+   * /shipments:
+   *   patch:
+   *     summary: Update the destination of a shipment
+   *     tags: [Shipments]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               shipmentId:
+   *                 type: string
+   *               newDestination:
+   *                 type: string
+   *     responses:
+   *       200:
+   *         description: Shipment updated successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Shipment'
+   *       400:
+   *         description: Bad Request
+   */
   router.patch('/shipments', async (req: Request, res: Response) => {
     try {
       const dto = req.body; 
