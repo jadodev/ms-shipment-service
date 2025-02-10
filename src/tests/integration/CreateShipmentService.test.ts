@@ -1,5 +1,3 @@
-// src/tests/integration/CreateShipmentService.integration.test.ts
-
 import { CreateShipmentService } from "../../application/services/CreateShipmentService";
 import { CreateShipmentDto } from "../../application/dto/CreateShipmentDto";
 import { ShipmentDto } from "../../application/dto/ShipmentDto";
@@ -90,7 +88,6 @@ describe("CreateShipmentService Integration Test", () => {
   });
 
   it("debe crear un shipment, persistirlo, publicar el evento y retornar el ShipmentDto correcto", async () => {
-    // Arrange: Se crea el DTO de creación a partir de los datos de prueba.
     const createShipmentDto = new CreateShipmentDto({
       shipmentId: "12345",
       customerId: "67890",
@@ -102,10 +99,8 @@ describe("CreateShipmentService Integration Test", () => {
       depositDate: "2025-02-09T10:00:00Z",
     });
 
-    // Act: Se ejecuta el servicio.
     const result: ShipmentDto = await createShipmentService.execute(createShipmentDto);
 
-    // El ShipmentDto esperado debe tener el mismo contenido, teniendo en cuenta que la fecha se transforma a ISO.
     const expectedDto: ShipmentDto = new ShipmentDto({
       shipmentId: "12345",
       customerId: "67890",
@@ -117,16 +112,12 @@ describe("CreateShipmentService Integration Test", () => {
       depositDate: new Date("2025-02-09T10:00:00Z").toISOString(),
     });
 
-    // Assert 1: Verificamos que el resultado del servicio sea el DTO esperado.
     expect(result).toEqual(expectedDto);
 
-    // Assert 2: Verificamos que el repositorio haya persistido el shipment.
     const persistedShipment = await repository.findById("12345");
     expect(persistedShipment).not.toBeNull();
     expect(persistedShipment?.shipmentId).toBe("12345");
 
-    // Assert 3: Verificamos que se haya publicado un evento en el topic "shipment.events"
-    // y que el evento tenga la estructura esperada.
     expect(eventPublisher.events.length).toBe(1);
     const publishedEvent = eventPublisher.events[0];
     expect(publishedEvent.topic).toBe("shipment.events");
