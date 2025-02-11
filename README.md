@@ -1,5 +1,3 @@
-# ms-shipment-service
-
 \---src
     |   index.ts
     |
