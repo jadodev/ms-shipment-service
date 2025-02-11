@@ -2,7 +2,7 @@
 FROM node:16
 
 # Establecemos el directorio de trabajo en el contenedor
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Copiamos el archivo package.json y package-lock.json (si existe)
 COPY package*.json ./
